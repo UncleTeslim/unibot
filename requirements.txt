@@ -1,0 +1,15 @@
+Flask
+python-dotenv
+pinecone
+pinecone-client
+langchain
+langchain_community
+langchain_huggingface
+langchain-openai
+langchain-google-genai
+langchain-pinecone
+langchain-core
+langgraph
+gunicorn
+sentence-transformersth
+pypdf

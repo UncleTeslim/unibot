@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UWLbot - University of West London Assistant</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <h1 class="logo">
+            <span class="uwl-text">UWLbot</span>
+
+          </h1>
+          <p class="subtitle">University of West London Assistant</p>
+        </div>
+      </header>
+
+      <!-- Chat Container -->
+      <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+          <!-- Welcome message -->
+          <div class="message bot-message">
+            <div class="message-content">
+              <p>
+                Hello! I'm UWLbot, your University of West London assistant. How
+                can I help you today?
+              </p>
+            </div>
+            <div class="message-time" id="welcomeTime"></div>
+          </div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div
+          class="loading-indicator"
+          id="loadingIndicator"
+          style="display: none"
+        >
+          <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="loading-text">UWLbot is thinking...</span>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+          <form class="chat-form" id="chatForm">
+            <div class="input-container">
+              <input
+                type="text"
+                id="messageInput"
+                placeholder="Ask me anything about UWL..."
+                autocomplete="off"
+                required
+              />
+              <button type="submit" id="sendButton">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2025 University of West London. UWLbot Assistant.</p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

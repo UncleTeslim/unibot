@@ -39,6 +39,7 @@
 #     return embeddings
     
 
+#IMPLEMENTED BETTER CHINKING STRATEGY TO INCREASE RETRIEVAL ACCURACY
 import re
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader, TextLoader
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -80,7 +81,6 @@ def load_data_from_directory(directory, file_type="pdf"):
                             loader_cls=PyPDFLoader)
     documents = loader.load()
     
-    # Clean each document's content
     print(f"Cleaning {len(documents)} documents...")
     cleaned_documents = []
     for doc in documents:
@@ -96,31 +96,29 @@ def split_documents(documents):
     """
     Split cleaned documents into optimized chunks for better retrieval.
     """
-    # Use larger chunks with better overlap
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1500,      # Larger chunks to capture complete info
-        chunk_overlap=300,    # More overlap to ensure continuity
+        chunk_size=1500,   
+        chunk_overlap=300,   
         length_function=len,
         separators=[
-            "\n\n\n",          # Page breaks
-            "\n\n",            # Paragraph breaks  
-            "\n",              # Line breaks
-            ". ",              # Sentences
-            " "                # Words
+            "\n\n\n",         
+            "\n\n",         
+            "\n",         
+            ". ",         
+            " "           
         ]
     )
     
     print(f"Splitting {len(documents)} documents into chunks...")
     chunks = text_splitter.split_documents(documents)
     
-    # Post-process to filter out low-quality chunks
+ 
     processed_chunks = []
     skipped_count = 0
     
     for chunk in chunks:
         content = chunk.page_content.strip()
         
-        # Skip chunks that are mostly references or too short
         if (content.startswith(("See page", "Refer to", "For more", "Visit www", "Contact")) or
             len(content) < 50):
             skipped_count += 1
