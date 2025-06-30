@@ -8,7 +8,7 @@ from src.prompt import *
 
 from langchain_pinecone import PineconeVectorStore
 
-from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
 
 from langchain_openai import ChatOpenAI
 from langchain_core.globals import set_llm_cache
@@ -25,12 +25,8 @@ load_dotenv()
 app = Flask(__name__) 
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-
-os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
-os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
 
 
 # llm = ChatGoogleGenerativeAI(
