@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify, render_template
 import os
 import langchain
-import logging
 
 from src.helpers import download_embeddings
 from src.prompt import *
@@ -27,6 +26,10 @@ app = Flask(__name__)
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+
+os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
+os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
 
 
 llm = ChatGoogleGenerativeAI(
@@ -71,9 +74,6 @@ def index():
     print("=== INDEX ROUTE CALLED ===")
     return render_template('index.html')
 
-@app.route('/health')
-def health():
-    return "App is running!"
 
 @app.route('/chat', methods=['POST'])
 def chat():
