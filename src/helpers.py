@@ -41,7 +41,6 @@
 
 #IMPLEMENTED BETTER CHINKING STRATEGY TO INCREASE RETRIEVAL ACCURACY
 import re
-from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader, TextLoader
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter

@@ -9,4 +9,5 @@ langchain-google-genai
 langchain-pinecone
 gunicorn
 sentence-transformers
+PyPDF2
 

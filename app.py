@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify, render_template
 import os
 import langchain
 import logging
-print("=== STARTING FLASK APP ===")
 
 from src.helpers import download_embeddings
 from src.prompt import *
@@ -19,7 +18,6 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
-print("=== IMPORTS SUCCESSFUL ===")
 
 
 set_llm_cache(InMemoryCache())
@@ -92,6 +90,6 @@ def chat():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
 
 
