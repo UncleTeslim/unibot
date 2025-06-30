@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify, render_template
 import os
 import langchain
+import logging
+print("=== STARTING FLASK APP ===")
 
 from src.helpers import download_embeddings
 from src.prompt import *
@@ -17,7 +19,7 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, SystemMessage
-
+print("=== IMPORTS SUCCESSFUL ===")
 
 
 set_llm_cache(InMemoryCache())
@@ -45,6 +47,7 @@ docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
     embedding=embeddings,
 )
+print("=== PINECONE CONNECTED ===")
 
 retriever = docsearch.as_retriever(
     search_type="similarity",
@@ -67,7 +70,12 @@ rag_chain = create_retrieval_chain(retriever,qa_chain)
 
 @app.route('/')
 def index():
+    print("=== INDEX ROUTE CALLED ===")
     return render_template('index.html')
+
+@app.route('/health')
+def health():
+    return "App is running!"
 
 @app.route('/chat', methods=['POST'])
 def chat():
