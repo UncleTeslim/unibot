@@ -10,7 +10,7 @@ from langchain_pinecone import PineconeVectorStore
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain_core.globals import set_llm_cache
 from langchain_community.cache import InMemoryCache
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -26,20 +26,34 @@ app = Flask(__name__)
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
 
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash-lite",
+# llm = ChatGoogleGenerativeAI(
+#     model="gemini-2.0-flash-lite",
+#     temperature=1.0,
+#     max_retries=2,
+#     google_api_key=GEMINI_API_KEY,
+#     # openai_api_key=OPENAI_API_KEY,
+#     max_tokens=1000,
+# )
+
+
+
+
+
+llm = ChatOpenAI(
+    model="gpt-4.1-nano",
     temperature=1.0,
     max_retries=2,
-    google_api_key=GEMINI_API_KEY,
-    # openai_api_key=OPENAI_API_KEY,
+    openai_api_key=OPENAI_API_KEY,
     max_tokens=1000,
 )
+
 
 embeddings = download_embeddings()
 index_name = "unibot"
