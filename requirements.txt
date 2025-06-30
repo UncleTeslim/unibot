@@ -1,26 +1,12 @@
-# Flask
-# python-dotenv
-# pinecone-client
-# langchain
-# langchain_community
-# langchain_huggingface
-# langchain-openai
-# langchain-google-genai
-# langchain-pinecone
-# gunicorn
-# sentence-transformers
-Flask>=2.3.0
-python-dotenv>=1.0.0
-pinecone-client>=2.2.4
-langchain>=0.1.0
-langchain_community>=0.0.20
-langchain_huggingface>=0.0.1
-langchain-openai>=0.1.0
-langchain-google-genai>=1.0.0
-langchain-pinecone>=0.1.0
-gunicorn>=21.0.0
-sentence-transformers>=2.2.0
-torch>=2.0.0
-transformers>=4.30.0
-tokenizers>=0.13.0
-safetensors>=0.3.0
+Flask
+python-dotenv
+pinecone-client
+langchain
+langchain_community
+langchain_huggingface
+langchain-openai
+langchain-google-genai
+langchain-pinecone
+gunicorn
+sentence-transformers
+
