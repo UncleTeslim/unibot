@@ -8,9 +8,9 @@ from src.prompt import *
 
 from langchain_pinecone import PineconeVectorStore
 
-# from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-from langchain_openai import ChatOpenAI
+# from langchain_openai import ChatOpenAI
 from langchain_core.globals import set_llm_cache
 from langchain_community.cache import InMemoryCache
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -25,30 +25,30 @@ load_dotenv()
 app = Flask(__name__) 
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
-# llm = ChatGoogleGenerativeAI(
-#     model="gemini-2.0-flash-lite",
-#     temperature=1.0,
-#     max_retries=2,
-#     google_api_key=GEMINI_API_KEY,
-#     # openai_api_key=OPENAI_API_KEY,
-#     max_tokens=1000,
-# )
-
-
-
-
-
-llm = ChatOpenAI(
-    model="gpt-4.1-nano",
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.0-flash-lite",
     temperature=1.0,
     max_retries=2,
-    openai_api_key=OPENAI_API_KEY,
+    google_api_key=GEMINI_API_KEY,
+    # openai_api_key=OPENAI_API_KEY,
     max_tokens=1000,
 )
+
+
+
+
+
+# llm = ChatOpenAI(
+#     model="gpt-4.1-nano",
+#     temperature=1.0,
+#     max_retries=2,
+#     openai_api_key=OPENAI_API_KEY,
+#     max_tokens=1000,
+# )
 
 
 embeddings = download_embeddings()
@@ -58,7 +58,7 @@ docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
     embedding=embeddings,
 )
-print("=== PINECONE CONNECTED ===")
+
 
 retriever = docsearch.as_retriever(
     search_type="similarity",
