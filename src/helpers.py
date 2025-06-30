@@ -41,6 +41,7 @@
 
 #IMPLEMENTED BETTER CHINKING STRATEGY TO INCREASE RETRIEVAL ACCURACY
 import re
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader, TextLoader
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
@@ -139,3 +140,15 @@ def download_embeddings():
         # model_kwargs={"device": "cuda"}
     )
     return embeddings
+
+
+
+# def download_embeddings():
+#     """
+#     Downloads embeddings for the documents in the specified directory.
+#     """
+#     embeddings = OpenAIEmbeddings(
+#         model="text-embedding-3-small",
+#         # model_kwargs={"device": "cuda"}
+#     )
+#     return embeddings
